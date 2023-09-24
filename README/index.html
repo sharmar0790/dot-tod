@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/mediumish-theme-jekyll/assets/images/logo.png">
+
+<title>Ingress-Readme | Dot-tod</title>
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Ingress-Readme | Dot-tod</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Ingress-Readme" />
+<meta name="author" content="commando" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kubernetes Ingress Controller" />
+<meta property="og:description" content="Kubernetes Ingress Controller" />
+<meta property="og:site_name" content="Dot-tod" />
+<meta property="og:image" content="/mediumish-theme-jekyll/assets/images/1.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-07T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/mediumish-theme-jekyll/assets/images/1.jpg" />
+<meta property="twitter:title" content="Ingress-Readme" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"commando"},"dateModified":"2023-09-07T00:00:00+00:00","datePublished":"2023-09-07T00:00:00+00:00","description":"Kubernetes Ingress Controller","headline":"Ingress-Readme","image":"/mediumish-theme-jekyll/assets/images/1.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/mediumish-theme-jekyll/README/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/mediumish-theme-jekyll/assets/images/logo.png"},"name":"commando"},"url":"/mediumish-theme-jekyll/README/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+<link href="/mediumish-theme-jekyll/assets/css/screen.css" rel="stylesheet">
+
+<link href="/mediumish-theme-jekyll/assets/css/main.css" rel="stylesheet">
+
+<script src="/mediumish-theme-jekyll/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+<!-- change your GA id in _config.yml -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-46278016-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/mediumish-theme-jekyll/">
+    <img src="/mediumish-theme-jekyll/assets/images/logo.png" alt="Dot-tod">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/mediumish-theme-jekyll/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/mediumish-theme-jekyll/about">About</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-ghost/"><i class="fab fa-snapchat-ghost"></i> Ghost Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/wowthemesnet/mediumish-theme-jekyll"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+
+                <script src="/mediumish-theme-jekyll/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/mediumish-theme-jekyll/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Dot-tod</h1>
+    <p class="lead">
+        Dot-tod, a guided blog for beginners.
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Ingress-Readme&url=/mediumish-theme-jekyll/README/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=/mediumish-theme-jekyll/README/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=/mediumish-theme-jekyll/README/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-10 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/mediumish-theme-jekyll/assets/images/avatar.png"
+                            alt="Commando">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="">Commando</a><a
+                            target="_blank" href="https://twitter.com/wowthemesnet" class="btn follow">Follow</a>
+                        <span class="author-description">This is the author box. Write a short description of the author here. You are currently previewing Mediumish demo, a Jekyll template compatible with Github pages.</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Ingress-Readme</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/mediumish-theme-jekyll/assets/images/1.jpg" alt="Ingress-Readme">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <h1 id="kubernetes-ingress-controller">Kubernetes Ingress Controller</h1>
+
+<h2 id="what-is-kubernetes-ingress-controller">What is Kubernetes Ingress Controller?</h2>
+<p>Moving production workloads to Kubernetes has many benefits, but it also increases the complexity of managing application traffic. An ingress controller is a dedicated load balancer for Kubernetes clusters.</p>
+
+<p>An ingress controller is a component that abstracts the complexity of routing application traffic within a Kubernetes cluster, providing a bridge between Kubernetes services and external services. An ingress controller is configured using objects called Ingress Resources, managed via the Kubernetes API.</p>
+
+<p>The main functions of a Kubernetes ingress controller are to receive and load-balance traffic from outside Kubernetes to pods running in a Kubernetes cluster, and manage egress traffic from services within the cluster to services outside the cluster. They monitor pods running on Kubernetes and automatically update load balancing rules when pods are added or removed from a service. This is part of a series of articles about <a href="https://www.solo.io/topics/kubernetes-api-gateway/">Kubernetes API gateway</a>.</p>
+
+<h2 id="kubernetes-ingress-controller-benefits-and-limitations">Kubernetes Ingress Controller Benefits and Limitations</h2>
+<p>Technically, an ingress is not a service, it is a layer 7 (application layer) router that is typically exposed through a load balancer service. It is cheaper than using a cloud load balancer for each service as it relies on an ingress controller which is hosted together with the application. It ensures each service has only one IP that can be accessed from the internet, and traffic intended for this IP is routed to the correct service by the ingress controller.</p>
+
+<h3 id="benefits-of-ingress-controllers-include">Benefits of ingress controllers include:</h3>
+
+<ul>
+  <li><strong>Provides secure access</strong> to services over HTTP or HTTPS paths, instead of using direct connections.</li>
+  <li><strong>Creates access routes</strong> to multiple services, with full control over routing of services and conditions for external access.</li>
+  <li><strong>Creates a single path</strong> for ingress traffic, which can be modified based on conditions defined by the operator, instead of opening many connections to access a Kubernetes application.</li>
+  <li><strong>Simplifies management</strong> of complex ingress processes, with the ability to easily manage access to multiple services in one system. This can have a significant impact on performance and management costs of large systems.</li>
+  <li>All ingress controllers support a set of annotations that enable specific software-based features. For example, in the Traefik ingress controller, users can use annotations to add middleware to ingress, even if not supported by the Ingress specification.</li>
+</ul>
+
+<h3 id="limitations-of-ingress-controllers">Limitations of ingress controllers:</h3>
+
+<ul>
+  <li>The Ingress controller only handles layer 7 traffic, while an ingress routes HTTP and HTTPS traffic. This means it is not possible to route TCP and UDP traffic.</li>
+  <li>Ingress is used in a single namespace. This means that anything within a Kubernetes namespace can only reference services within the same namespace. To solve this problem, Kubernetes has introduced a gateway API specification, which enables cross-namespace communication. This specification is still in alpha status. A Kubernetes-native API Gateway can be used today for cross-namespace communications.</li>
+</ul>
+
+<h3 id="how-to-choose-an-ingress-controller">How to choose an ingress controller</h3>
+
+<p>There are several ingress controllers available in Kubernetes, each has advantages and preferred use cases. It can be challenging to select the ingress controller suitable for your needs.</p>
+
+<p>If you’re managing a small production environment and don’t plan to scale it, you probably need only the standard features such as load balancing, flow control, and flow splitting. Be careful not to select a controller that has more functionality than you need, because this can negatively impact performance and create unneeded management complexity.</p>
+
+<p>However, if your application runs in a distributed, multi-cloud environment, you may need an enterprise-grade, high-performance networking solution.</p>
+
+<h2 id="ingress-controller-solutions">Ingress Controller Solutions</h2>
+<p>Kubernetes currently provides two ingress solutions by default —GCE L7 Load Balancer (GLBC) and ingress-nginx. You can use other solutions, but you’ll have to first deploy them in your Kubernetes cluster. Here is a full list of ingress controllers supported by Kubernetes. We’ll cover a few popular open source solutions.</p>
+
+<h3 id="istio-ingress">Istio Ingress</h3>
+<p>Istio Ingress is a service mesh solution that can also serve as an ingress controller, regulating outside traffic entering a Kubernetes cluster. Istio makes use of Envoy proxies, deployed in a sidecar container alongside every exposed service in the cluster. Envoy offers advanced traffic routing and observability capabilities.</p>
+
+<p>When Istio is used as an ingress solution, it runs completely separated from services, intercepting all traffic and collecting metrics, tracing headers, and applying JWT authentication.</p>
+
+<h3 id="nginx">NGINX</h3>
+<p>Ingress-nginx is an open-source ingress controller built into the official Kubernetes distribution. It is based on the NGINX reverse proxy, and provides simple HTTP/S routing and SSL capabilities.</p>
+
+<p>NGINX Plus provides an expanded version of the basic ingress-nginx controller, with improved performance and additional features, including tracing, active health checks, JSON Web Token (JWT) authentication, and OpenID single sign on (SSO). It is a commercial software product sold on a subscription basis by NGINX, Inc.</p>
+
+<h3 id="traefik">Traefik</h3>
+<p>Traefik, created by Containous, was originally built as an HTTP reverse proxy and load balancer with dynamic routing capabilities. It is written in Go, allowing it to support Kubernetes as well as other container environments.</p>
+
+<p>Traefik offers HTTP/2, WebSocket, and certificate encryption based on Let’s Encrypt (an open certificate authority) by default making it easy to implement for beginners. It also provides a UI that visualizes controller and Kubernetes metrics.</p>
+
+<h3 id="kong-ingress">Kong Ingress</h3>
+<p>Kong was originally designed as an API Gateway. Recently, its makers added gRPC support, active health checks on load balancers, and request/response authentication, making it a good option for Kubernetes ingress.</p>
+
+<p>Kong has the benefit of blocking privilege escalation by ensuring the controller can only operate in one Kubernetes namespace.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+                <small>
+                    <span class="post-date"><time class="post-date" datetime=" 2023-09-07">07 Sep 2023</time></span>
+                    
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/mediumish-theme-jekyll/categories#Jekyll">Jekyll</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/mediumish-theme-jekyll/categories#tutorial">tutorial</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+                
+                <a class="prev d-block col-md-6" href="/mediumish-theme-jekyll//terragrunt/"> &laquo;
+                    Test Changes to Terragrunt Starter</a>
+                
+                
+                <a class="next d-block col-md-6 text-lg-right"
+                    href="/mediumish-theme-jekyll//docker-networking/">Docker Networking &raquo; </a>
+                
+                <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+<div class="container">
+    <div id="comments" class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+        </div>
+    </div>
+</div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+<!-- Bottom Alert Bar
+================================================== -->
+<div class="alertbar">
+	<div class="container text-center">
+		<span><img src="/mediumish-theme-jekyll/assets/images/logo.png" alt="Dot-tod"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
+        <form action="https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
+            <div class="mc-field-group">
+            <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
+            <input type="submit" value="Subscribe" name="subscribe" class="heart">
+            </div>
+        </form>
+	</div>
+</div>
+
+    
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#Jekyll">Jekyll (6)</a>
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#tutorial">tutorial (6)</a>
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#Docker">Docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#Networking">Networking (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2023 Dot-tod 
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/mediumish-theme-jekyll/assets/js/mediumish.js"></script>
+
+
+
+<script src="/mediumish-theme-jekyll/assets/js/ie10-viewport-bug-workaround.js"></script> 
+
+
+<script id="dsq-count-scr" src="//demowebsite.disqus.com/count.js"></script>
+
+
+</body>
+</html>

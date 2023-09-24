@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/mediumish-theme-jekyll/assets/images/logo.png">
+
+<title>Istio | Dot-tod</title>
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Istio | Dot-tod</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Istio" />
+<meta name="author" content="commando" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Istio" />
+<meta property="og:description" content="Istio" />
+<meta property="og:site_name" content="Dot-tod" />
+<meta property="og:image" content="/mediumish-theme-jekyll/assets/images/1.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-04T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/mediumish-theme-jekyll/assets/images/1.jpg" />
+<meta property="twitter:title" content="Istio" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"commando"},"dateModified":"2023-09-04T00:00:00+00:00","datePublished":"2023-09-04T00:00:00+00:00","description":"Istio","headline":"Istio","image":"/mediumish-theme-jekyll/assets/images/1.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/mediumish-theme-jekyll/welcome-to-istio/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/mediumish-theme-jekyll/assets/images/logo.png"},"name":"commando"},"url":"/mediumish-theme-jekyll/welcome-to-istio/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+<link href="/mediumish-theme-jekyll/assets/css/screen.css" rel="stylesheet">
+
+<link href="/mediumish-theme-jekyll/assets/css/main.css" rel="stylesheet">
+
+<script src="/mediumish-theme-jekyll/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+<!-- change your GA id in _config.yml -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-46278016-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/mediumish-theme-jekyll/">
+    <img src="/mediumish-theme-jekyll/assets/images/logo.png" alt="Dot-tod">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/mediumish-theme-jekyll/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/mediumish-theme-jekyll/about">About</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-ghost/"><i class="fab fa-snapchat-ghost"></i> Ghost Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/wowthemesnet/mediumish-theme-jekyll"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+
+                <script src="/mediumish-theme-jekyll/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/mediumish-theme-jekyll/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Dot-tod</h1>
+    <p class="lead">
+        Dot-tod, a guided blog for beginners.
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Istio&url=/mediumish-theme-jekyll/welcome-to-istio/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=/mediumish-theme-jekyll/welcome-to-istio/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=/mediumish-theme-jekyll/welcome-to-istio/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-10 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/mediumish-theme-jekyll/assets/images/avatar.png"
+                            alt="Commando">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="">Commando</a><a
+                            target="_blank" href="https://twitter.com/wowthemesnet" class="btn follow">Follow</a>
+                        <span class="author-description">This is the author box. Write a short description of the author here. You are currently previewing Mediumish demo, a Jekyll template compatible with Github pages.</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Istio</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/mediumish-theme-jekyll/assets/images/1.jpg" alt="Istio">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <h1 id="istio">Istio</h1>
+
+<p><a href="https://bestpractices.coreinfrastructure.org/projects/1395"><img src="https://bestpractices.coreinfrastructure.org/projects/1395/badge" alt="CII Best Practices" /></a>
+<a href="https://goreportcard.com/report/github.com/istio/istio"><img src="https://goreportcard.com/badge/github.com/istio/istio" alt="Go Report Card" /></a>
+<a href="https://godoc.org/istio.io/istio"><img src="https://godoc.org/istio.io/istio?status.svg" alt="GoDoc" /></a></p>
+
+<p><a href="https://istio.io/">
+    <img src="https://github.com/istio/istio/raw/master/logo/istio-bluelogo-whitebackground-unframed.svg" alt="Istio logo" title="Istio" height="100" width="100" />
+</a></p>
+
+<hr />
+
+<p>Istio is an open source service mesh that layers transparently onto existing distributed applications. Istio’s powerful features provide a uniform and more efficient way to secure, connect, and monitor services. Istio is the path to load balancing, service-to-service authentication, and monitoring – with few or no service code changes.</p>
+
+<ul>
+  <li>For in-depth information about how to use Istio, visit <a href="https://istio.io">istio.io</a></li>
+  <li>To ask questions and get assistance from our community, visit <a href="https://discuss.istio.io">discuss.istio.io</a></li>
+  <li>To learn how to participate in our overall community, visit <a href="https://istio.io/about/community">our community page</a></li>
+</ul>
+
+<p>In this README:</p>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#repositories">Repositories</a></li>
+  <li><a href="#issue-management">Issue management</a></li>
+</ul>
+
+<p>In addition, here are some other documents you may wish to read:</p>
+
+<ul>
+  <li><a href="https://github.com/istio/community#istio-community">Istio Community</a> - describes how to get involved and contribute to the Istio project</li>
+  <li><a href="https://github.com/istio/istio/wiki/Preparing-for-Development">Istio Developer’s Guide</a> - explains how to set up and use an Istio development environment</li>
+  <li><a href="https://github.com/istio/istio/wiki/Development-Conventions">Project Conventions</a> - describes the conventions we use within the code base</li>
+  <li><a href="https://github.com/istio/istio/wiki/Writing-Fast-and-Lean-Code">Creating Fast and Lean Code</a> - performance-oriented advice and guidelines for the code base</li>
+</ul>
+
+<p>You’ll find many other useful documents on our <a href="https://github.com/istio/istio/wiki">Wiki</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p><a href="https://istio.io/latest/docs/concepts/what-is-istio/">Istio</a> is an open platform for providing a uniform way to <a href="https://istio.io/latest/docs/examples/microservices-istio/">integrate
+microservices</a>, manage <a href="https://istio.io/latest/docs/concepts/traffic-management/">traffic flow</a> across microservices, enforce policies
+and aggregate telemetry data. Istio’s control plane provides an abstraction
+layer over the underlying cluster management platform, such as Kubernetes.</p>
+
+<p>Istio is composed of these components:</p>
+
+<ul>
+  <li>
+    <p><strong>Envoy</strong> - Sidecar proxies per microservice to handle ingress/egress traffic
+ between services in the cluster and from a service to external
+ services. The proxies form a <em>secure microservice mesh</em> providing a rich
+ set of functions like discovery, rich layer-7 routing, circuit breakers,
+ policy enforcement and telemetry recording/reporting
+ functions.</p>
+
+    <blockquote>
+      <p>Note: The service mesh is not an overlay network. It
+simplifies and enhances how microservices in an application talk to each
+other over the network provided by the underlying platform.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Istiod</strong> - The Istio control plane. It provides service discovery, configuration and certificate management. It consists of the following sub-components:</p>
+
+    <ul>
+      <li>
+        <p><strong>Pilot</strong> - Responsible for configuring the proxies at runtime.</p>
+      </li>
+      <li>
+        <p><strong>Citadel</strong> - Responsible for certificate issuance and rotation.</p>
+      </li>
+      <li>
+        <p><strong>Galley</strong> - Responsible for validating, ingesting, aggregating, transforming and distributing config within Istio.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Operator</strong> - The component provides user friendly options to operate the Istio service mesh.</p>
+  </li>
+</ul>
+
+<h2 id="repositories">Repositories</h2>
+
+<p>The Istio project is divided across a few GitHub repositories:</p>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/istio/api">istio/api</a>. This repository defines
+component-level APIs and common configuration formats for the Istio platform.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/istio/community">istio/community</a>. This repository contains
+information on the Istio community, including the various documents that govern
+the Istio open source project.</p>
+  </li>
+  <li>
+    <p><a href="README.md">istio/istio</a>. This is the main code repository. It hosts Istio’s
+core components, install artifacts, and sample programs. It includes:</p>
+
+    <ul>
+      <li>
+        <p><a href="istioctl/">istioctl</a>. This directory contains code for the
+<a href="https://istio.io/latest/docs/reference/commands/istioctl/"><em>istioctl</em></a> command line utility.</p>
+      </li>
+      <li>
+        <p><a href="operator/">operator</a>. This directory contains code for the
+<a href="https://istio.io/latest/docs/setup/install/operator/">Istio Operator</a>.</p>
+      </li>
+      <li>
+        <p><a href="pilot/">pilot</a>. This directory
+contains platform-specific code to populate the
+<a href="https://istio.io/docs/concepts/traffic-management/#pilot">abstract service model</a>, dynamically reconfigure the proxies
+when the application topology changes, as well as translate
+<a href="https://istio.io/latest/docs/reference/config/networking/">routing rules</a> into proxy specific configuration.</p>
+      </li>
+      <li>
+        <p><a href="security/">security</a>. This directory contains <a href="https://istio.io/latest/docs/concepts/security/">security</a> related code,
+including Citadel (acting as Certificate Authority), citadel agent, etc.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><a href="https://github.com/istio/proxy">istio/proxy</a>. The Istio proxy contains
+extensions to the <a href="https://github.com/envoyproxy/envoy">Envoy proxy</a> (in the form of
+Envoy filters) that support authentication, authorization, and telemetry collection.</p>
+  </li>
+</ul>
+
+<h2 id="issue-management">Issue management</h2>
+
+<p>We use GitHub to track all of our bugs and feature requests. Each issue we track has a variety of metadata:</p>
+
+<ul>
+  <li>
+    <p><strong>Epic</strong>. An epic represents a feature area for Istio as a whole. Epics are fairly broad in scope and are basically product-level things.
+Each issue is ultimately part of an epic.</p>
+  </li>
+  <li>
+    <p><strong>Milestone</strong>. Each issue is assigned a milestone. This is 0.1, 0.2, …, or ‘Nebulous Future’. The milestone indicates when we
+think the issue should get addressed.</p>
+  </li>
+  <li>
+    <p><strong>Priority</strong>. Each issue has a priority which is represented by the column in the <a href="https://github.com/orgs/istio/projects/6">Prioritization</a> project. Priority can be one of
+P0, P1, P2, or &gt;P2. The priority indicates how important it is to address the issue within the milestone. P0 says that the
+milestone cannot be considered achieved if the issue isn’t resolved.</p>
+  </li>
+</ul>
+
+<hr />
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/cncf/artwork/master/other/cncf/horizontal/color/cncf-color.svg" width="300" alt="Cloud Native Computing Foundation logo" />
+    <p>Istio is a <a href="https://cncf.io">Cloud Native Computing Foundation</a> project.</p>
+</div>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+                <small>
+                    <span class="post-date"><time class="post-date" datetime=" 2023-09-04">04 Sep 2023</time></span>
+                    
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/mediumish-theme-jekyll/categories#Jekyll">Jekyll</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/mediumish-theme-jekyll/categories#tutorial">tutorial</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+                
+                
+                <a class="next d-block col-md-6 text-lg-right"
+                    href="/mediumish-theme-jekyll//welcome-to-kong/">Welcome to Kong World!!! &raquo; </a>
+                
+                <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+<div class="container">
+    <div id="comments" class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+        </div>
+    </div>
+</div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+<!-- Bottom Alert Bar
+================================================== -->
+<div class="alertbar">
+	<div class="container text-center">
+		<span><img src="/mediumish-theme-jekyll/assets/images/logo.png" alt="Dot-tod"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
+        <form action="https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
+            <div class="mc-field-group">
+            <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
+            <input type="submit" value="Subscribe" name="subscribe" class="heart">
+            </div>
+        </form>
+	</div>
+</div>
+
+    
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#Jekyll">Jekyll (6)</a>
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#tutorial">tutorial (6)</a>
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#Docker">Docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/mediumish-theme-jekyll/categories#Networking">Networking (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2023 Dot-tod 
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/mediumish-theme-jekyll/assets/js/mediumish.js"></script>
+
+
+
+<script src="/mediumish-theme-jekyll/assets/js/ie10-viewport-bug-workaround.js"></script> 
+
+
+<script id="dsq-count-scr" src="//demowebsite.disqus.com/count.js"></script>
+
+
+</body>
+</html>

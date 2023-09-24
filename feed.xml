@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dot-tod</title>
+    <description>Dot-tod, a guided blog for beginners.</description>
+    <link>/mediumish-theme-jekyll/</link>
+    <atom:link href="/mediumish-theme-jekyll/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 24 Sep 2023 17:51:13 +0000</pubDate>
+    <lastBuildDate>Sun, 24 Sep 2023 17:51:13 +0000</lastBuildDate>
+    <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>Docker Networking</title>
+        <description>&lt;p&gt;Docker networking is one of the core functionality in the docker era. It allows and define which container can talk to which and which are all container can be combine together. This is a pluggable subsystem using drivers.&lt;/p&gt;
+
+&lt;p&gt;Types of Docker networking&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;bridge&lt;/li&gt;
+  &lt;li&gt;host&lt;/li&gt;
+  &lt;li&gt;Overlays&lt;/li&gt;
+  &lt;li&gt;ipvlan&lt;/li&gt;
+  &lt;li&gt;macvlan&lt;/li&gt;
+  &lt;li&gt;none&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this page, I am going to discuss about each networking options one-by-one.&lt;/p&gt;
+
+&lt;p&gt;Let’s start&lt;/p&gt;
+
+&lt;h2 id=&quot;bridge&quot;&gt;bridge&lt;/h2&gt;
+&lt;p&gt;Bridge network is the Link layer device which forwards the all the traffic between network segments. Docker uses a software based bridge networking device.&lt;/p&gt;
+
+&lt;p&gt;Bridge networking allows container to communicate with each other which are connected to the same bridge network. This also isolate these containers from outside which are not connected to the same bridge network.&lt;/p&gt;
+
+&lt;p&gt;here, the idea is if we want to group together some containers and do not want them to be accesses by others’ container on the same host then we can spin up all thoese containers under a bridge network.&lt;/p&gt;
+
+&lt;p&gt;We can create multiple bridge network, so container belongs to network bridge-A will not be able to those connected to network bridge-B.&lt;/p&gt;
+
+&lt;p&gt;This is de-facto default network type. When we do not provide any network by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--network&lt;/code&gt; flags during &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockwer run&lt;/code&gt; command, then docker by default create the container in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bridge&lt;/code&gt; host.&lt;/p&gt;
+
+&lt;p&gt;Bridge network apply to those containers running on &lt;strong&gt;same&lt;/strong&gt; docker host machine.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Check the networks&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker network ls&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Output&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;docker network &lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;NETWORK ID     NAME      DRIVER    SCOPE
+21fdfd7ad08c   bridge    bridge    &lt;span class=&quot;nb&quot;&gt;local
+&lt;/span&gt;fb231c81ea6a   host      host      &lt;span class=&quot;nb&quot;&gt;local
+&lt;/span&gt;e7861043a1f3   none      null      &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;By default, docker comes up with default bridge network.If we want we can create user define bridge network as well.&lt;/p&gt;
+
+&lt;p&gt;Difference between default and user define bridge network&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;&lt;br /&gt;
+Container within default bridge network can communicate to each other using IP Address on the other hand in case of user define bridge network they can communicate using containers name.
+Imagine an application with a web front-end and a database back-end. If you call your containers web and db, the web container can connect to the db container at db, no matter which Docker host the application stack is running on.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Better Isolation&lt;/strong&gt;&lt;br /&gt;
+By default, when we spin a new container they all connect to a default one, where we might be creating all other containers hence does not provide better isolation. But you’ll get the better isolation in case of user define bridge network.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Better Control&lt;/strong&gt;&lt;br /&gt;
+Control we cannot control or change anything in default bridge network as it is outside of control of docker and also require restart of docker itself. But on the other hand we get better control on user define one and we can also attach/detach containers on the fly without even restarting the docker.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 24 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/docker-networking/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/docker-networking/</guid>
+        
+        
+        <category>Docker</category>
+        
+        <category>Networking</category>
+        
+      </item>
+    
+      <item>
+        <title>Ingress-Readme</title>
+        <description>&lt;h1 id=&quot;kubernetes-ingress-controller&quot;&gt;Kubernetes Ingress Controller&lt;/h1&gt;
+
+&lt;h2 id=&quot;what-is-kubernetes-ingress-controller&quot;&gt;What is Kubernetes Ingress Controller?&lt;/h2&gt;
+&lt;p&gt;Moving production workloads to Kubernetes has many benefits, but it also increases the complexity of managing application traffic. An ingress controller is a dedicated load balancer for Kubernetes clusters.&lt;/p&gt;
+
+&lt;p&gt;An ingress controller is a component that abstracts the complexity of routing application traffic within a Kubernetes cluster, providing a bridge between Kubernetes services and external services. An ingress controller is configured using objects called Ingress Resources, managed via the Kubernetes API.&lt;/p&gt;
+
+&lt;p&gt;The main functions of a Kubernetes ingress controller are to receive and load-balance traffic from outside Kubernetes to pods running in a Kubernetes cluster, and manage egress traffic from services within the cluster to services outside the cluster. They monitor pods running on Kubernetes and automatically update load balancing rules when pods are added or removed from a service. This is part of a series of articles about &lt;a href=&quot;https://www.solo.io/topics/kubernetes-api-gateway/&quot;&gt;Kubernetes API gateway&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;kubernetes-ingress-controller-benefits-and-limitations&quot;&gt;Kubernetes Ingress Controller Benefits and Limitations&lt;/h2&gt;
+&lt;p&gt;Technically, an ingress is not a service, it is a layer 7 (application layer) router that is typically exposed through a load balancer service. It is cheaper than using a cloud load balancer for each service as it relies on an ingress controller which is hosted together with the application. It ensures each service has only one IP that can be accessed from the internet, and traffic intended for this IP is routed to the correct service by the ingress controller.&lt;/p&gt;
+
+&lt;h3 id=&quot;benefits-of-ingress-controllers-include&quot;&gt;Benefits of ingress controllers include:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Provides secure access&lt;/strong&gt; to services over HTTP or HTTPS paths, instead of using direct connections.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Creates access routes&lt;/strong&gt; to multiple services, with full control over routing of services and conditions for external access.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Creates a single path&lt;/strong&gt; for ingress traffic, which can be modified based on conditions defined by the operator, instead of opening many connections to access a Kubernetes application.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Simplifies management&lt;/strong&gt; of complex ingress processes, with the ability to easily manage access to multiple services in one system. This can have a significant impact on performance and management costs of large systems.&lt;/li&gt;
+  &lt;li&gt;All ingress controllers support a set of annotations that enable specific software-based features. For example, in the Traefik ingress controller, users can use annotations to add middleware to ingress, even if not supported by the Ingress specification.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;limitations-of-ingress-controllers&quot;&gt;Limitations of ingress controllers:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The Ingress controller only handles layer 7 traffic, while an ingress routes HTTP and HTTPS traffic. This means it is not possible to route TCP and UDP traffic.&lt;/li&gt;
+  &lt;li&gt;Ingress is used in a single namespace. This means that anything within a Kubernetes namespace can only reference services within the same namespace. To solve this problem, Kubernetes has introduced a gateway API specification, which enables cross-namespace communication. This specification is still in alpha status. A Kubernetes-native API Gateway can be used today for cross-namespace communications.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-choose-an-ingress-controller&quot;&gt;How to choose an ingress controller&lt;/h3&gt;
+
+&lt;p&gt;There are several ingress controllers available in Kubernetes, each has advantages and preferred use cases. It can be challenging to select the ingress controller suitable for your needs.&lt;/p&gt;
+
+&lt;p&gt;If you’re managing a small production environment and don’t plan to scale it, you probably need only the standard features such as load balancing, flow control, and flow splitting. Be careful not to select a controller that has more functionality than you need, because this can negatively impact performance and create unneeded management complexity.&lt;/p&gt;
+
+&lt;p&gt;However, if your application runs in a distributed, multi-cloud environment, you may need an enterprise-grade, high-performance networking solution.&lt;/p&gt;
+
+&lt;h2 id=&quot;ingress-controller-solutions&quot;&gt;Ingress Controller Solutions&lt;/h2&gt;
+&lt;p&gt;Kubernetes currently provides two ingress solutions by default —GCE L7 Load Balancer (GLBC) and ingress-nginx. You can use other solutions, but you’ll have to first deploy them in your Kubernetes cluster. Here is a full list of ingress controllers supported by Kubernetes. We’ll cover a few popular open source solutions.&lt;/p&gt;
+
+&lt;h3 id=&quot;istio-ingress&quot;&gt;Istio Ingress&lt;/h3&gt;
+&lt;p&gt;Istio Ingress is a service mesh solution that can also serve as an ingress controller, regulating outside traffic entering a Kubernetes cluster. Istio makes use of Envoy proxies, deployed in a sidecar container alongside every exposed service in the cluster. Envoy offers advanced traffic routing and observability capabilities.&lt;/p&gt;
+
+&lt;p&gt;When Istio is used as an ingress solution, it runs completely separated from services, intercepting all traffic and collecting metrics, tracing headers, and applying JWT authentication.&lt;/p&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;NGINX&lt;/h3&gt;
+&lt;p&gt;Ingress-nginx is an open-source ingress controller built into the official Kubernetes distribution. It is based on the NGINX reverse proxy, and provides simple HTTP/S routing and SSL capabilities.&lt;/p&gt;
+
+&lt;p&gt;NGINX Plus provides an expanded version of the basic ingress-nginx controller, with improved performance and additional features, including tracing, active health checks, JSON Web Token (JWT) authentication, and OpenID single sign on (SSO). It is a commercial software product sold on a subscription basis by NGINX, Inc.&lt;/p&gt;
+
+&lt;h3 id=&quot;traefik&quot;&gt;Traefik&lt;/h3&gt;
+&lt;p&gt;Traefik, created by Containous, was originally built as an HTTP reverse proxy and load balancer with dynamic routing capabilities. It is written in Go, allowing it to support Kubernetes as well as other container environments.&lt;/p&gt;
+
+&lt;p&gt;Traefik offers HTTP/2, WebSocket, and certificate encryption based on Let’s Encrypt (an open certificate authority) by default making it easy to implement for beginners. It also provides a UI that visualizes controller and Kubernetes metrics.&lt;/p&gt;
+
+&lt;h3 id=&quot;kong-ingress&quot;&gt;Kong Ingress&lt;/h3&gt;
+&lt;p&gt;Kong was originally designed as an API Gateway. Recently, its makers added gRPC support, active health checks on load balancers, and request/response authentication, making it a good option for Kubernetes ingress.&lt;/p&gt;
+
+&lt;p&gt;Kong has the benefit of blocking privilege escalation by ensuring the controller can only operate in one Kubernetes namespace.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 07 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/README/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/README/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Test Changes to Terragrunt Starter</title>
+        <description>&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Version&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Terragrunt&lt;/td&gt;
+      &lt;td&gt;0.45.0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Terraform&lt;/td&gt;
+      &lt;td&gt;1.4.4&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;h2 id=&quot;install-terraform&quot;&gt;Install Terraform&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Link
+    &lt;ul&gt;
+      &lt;li&gt;https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;MacOs
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew tap hashicorp/tap&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew install hashicorp/tap/terraform&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew update&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;install-terragrunt&quot;&gt;Install Terragrunt&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Link https://terragrunt.gruntwork.io/docs/getting-started/install/&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;MacOs&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;brew install terragrunt&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;feature-of-terragrunt-over-terraform&quot;&gt;Feature of Terragrunt over Terraform&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Allow us to pass variable in s3_backend like storage bucket.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Terragrunt &amp;amp; Terraform Version Managers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/tfutils/tfenv&quot;&gt;tfenv&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/cunymatthieu/tgenv&quot;&gt;tgenv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Documentation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/index.html&quot;&gt;Terraform&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://terragrunt.gruntwork.io/docs/&quot;&gt;Terragrunt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;RECOMMENDED: Run separately from each config directory containing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terragrunt.hcl&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;terragrunt plan
+terragrunt apply
+[Optional] terragrunt apply -auto-approve  # if you want to apply the changes with approval.
+terragrunt destroy
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;OPTIONAL: Run everything at once from a specific directory.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;terragrunt run-all plan
+terragrunt run-all apply
+terragrunt run-all destroy --terragrunt-ignore-external-dependencies
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;connect-with-the-cluster&quot;&gt;Connect with the cluster&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Configure &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws cli&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Check &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws --version&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Create or update the kubeconfig file for your cluster:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws eks --region eu-west-2 update-kubeconfig --name local-practice-dev-EKS-Cluster&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;aws ecr get-login-password –region region&lt;/td&gt;
+      &lt;td&gt;docker login –username AWS –password-stdin &lt;aws_account_id&gt;.dkr.ecr.region.amazonaws.com&lt;/aws_account_id&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;kubectl config use-context minikube 
+minikube dahsboard&lt;/p&gt;
+
+&lt;h3 id=&quot;aws-load-balancer-annotations-and-docs-link&quot;&gt;AWS Load Balancer annotations and docs link&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/service/annotations/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;find-and-delete-files-or-directories-recursively&quot;&gt;Find and Delete files or directories recursively&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.terraform.lock.hcl&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-delete&lt;/span&gt;
+find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.terragrunt-cache&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; d &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; +
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;export KUBECONFIG=$(pwd) /managing-eks-terraform-cluster_config&lt;/p&gt;
+
+&lt;h3 id=&quot;argocd-credentials&quot;&gt;ArgoCD Credentials&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;user: admin&lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;password: kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}”&lt;/td&gt;
+          &lt;td&gt;base64 -d&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+  &lt;li&gt;kaka&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/terragrunt/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/terragrunt/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Traefik</title>
+        <description>&lt;h1 id=&quot;traefik-demo&quot;&gt;Traefik-demo&lt;/h1&gt;
+
+&lt;h2 id=&quot;what-is-traefik&quot;&gt;What is Traefik&lt;/h2&gt;
+&lt;p&gt;Kubernetes Ingress and Traefik Ingress controller are considered essential components of any Kubernetes cluster for managing and routing external traffic to your Kubernetes services. In this article, we’ll explore the basics of Kubernetes Ingress, and the process of installing Traefik Ingress controller on a Kubernetes cluster, and how you can utilize it to manage traffic in a Kubernetes cluster.&lt;/p&gt;
+
+&lt;p&gt;A Kubernetes Ingress is a resource that defines rules for managing external traffic to Kubernetes services. This resource has rules that define how traffic is routed to different Kubernetes services based on criteria such as hostnames, paths, and protocols. An Ingress Controller is a component within Kubernetes that manages incoming traffic to Kubernetes internal services. An Ingress controller is used to manage traffic at Layer 7 (HTTP/HTTPS) and also for terminating SSL/TLS and provide load balancing capabilities.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Main functions of an Ingress Controller:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Receive incoming external traffic and forwards it to the appropriate Kubernetes backend service.
+Implements routing rules specified in an Ingress resource.
+Handles SSL/TLS encryption and decryption – SSL termination.
+Provides load balancing capabilities to distribute traffic across multiple pods and nodes in a Kubernetes cluster.
+There are several Ingress Controllers available for use in Kubernetes environment, and each has its own set of features and capabilities. The one that we’ll use in this article is Traefik Ingress Controller.&lt;/p&gt;
+
+&lt;p&gt;Traefik Ingress Controller is a modern, cloud-native, and dynamic Ingress Controller with support for several backends and can be used to manage traffic across multiple Kubernetes clusters. Traefik provides advanced routing capabilities and load balancing features.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;h3 id=&quot;start-minikube&quot;&gt;Start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Minikube&lt;/code&gt;&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;minikube start --nodes 2 --driver qemu --network socket_vmnet --cpus=4 --memory=6g --disk-size=10g
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;start-minikube-tunnel&quot;&gt;Start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minikube tunnel&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minikube tunnel&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;install-traefik&quot;&gt;Install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;traefik&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Via Helm&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+
+&lt;span class=&quot;c&quot;&gt;# Install&lt;/span&gt;
+helm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;traefik traefik/traefik &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; traefik &lt;span class=&quot;nt&quot;&gt;--create-namespace&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# verify&lt;/span&gt;
+kubectl get svc &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; app.kubernetes.io/name&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;traefik
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;expose-the-app-to-the-internet&quot;&gt;Expose the App to the Internet&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl apply -f deploy.yaml&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;apply-igress&quot;&gt;Apply Igress&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl apply -f ingress.yaml&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cleanup&quot;&gt;Cleanup&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# - traefik&lt;/span&gt;
+helm uninstall traefik &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; traefik
+
+&lt;span class=&quot;c&quot;&gt;# - minikube&lt;/span&gt;
+minikube delete
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/welcome-to-traefik/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/welcome-to-traefik/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Nginx World</title>
+        <description>&lt;h1 id=&quot;nginx-ingress-demo&quot;&gt;Nginx-Ingress-demo&lt;/h1&gt;
+
+&lt;h2 id=&quot;what-and-benefits&quot;&gt;What and Benefits&lt;/h2&gt;
+&lt;p&gt;The NGINX Ingress Controller an implementation of a Kubernetes Ingress Controller for NGINX and NGINX Plus.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is the Ingress?&lt;/strong&gt;
+This is one of a special type of kubernetes resources which extend the kubernetes functionality to deliver the outside/external request to the underline kubernetes services/resources. It also lets you configure an HTTP load balancer for applications running on Kubernetes, represented by one or more Services.&lt;/p&gt;
+
+&lt;p&gt;The Ingress resource supports the following features:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Content-based routing:&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Host-based routing. For example, routing requests with the host header foo.example.com to one group of services and the host header bar.example.com to another group.&lt;/li&gt;
+      &lt;li&gt;Path-based routing. For example, routing requests with the URI that starts with /serviceA to service A and requests with the URI that starts with /serviceB to service B.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;h3 id=&quot;start-minikube&quot;&gt;Start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Minikube&lt;/code&gt;&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;minikube start --nodes 2 --driver qemu --network socket_vmnet --cpus=4 --memory=6g --disk-size=10g
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-eks-cluster&quot;&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EKS&lt;/code&gt; cluster&lt;/h3&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;eksctl create cluster &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; nlb-lab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt; 1.20 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--nodegroup-name&lt;/span&gt; nlb-lab-workers &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--node-type&lt;/span&gt; t2.medium &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--nodes&lt;/span&gt; 2 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; us-west-2
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-nginx&quot;&gt;Install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Nginx&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Via Kubectl apply
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/aws/deploy.yaml
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Via Helm
+```shell
+helm repo add nginx-stable https://helm.nginx.com/stable
+helm repo update&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;install&quot;&gt;Install&lt;/h1&gt;
+&lt;p&gt;helm install nginx-ingress nginx-stable/nginx-ingress –set rbac.create=true –namespace nginx-ingress –create-namespace&lt;/p&gt;
+
+&lt;h1 id=&quot;verify&quot;&gt;Verify&lt;/h1&gt;
+&lt;p&gt;kubectl get pods –all-namespaces -l app=nginx-ingress-nginx-ingress&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
+### Start `minikube tunnel`
+`minikube tunnel`
+
+### Expose the App to the Internet
+`kubectl apply -f deploy.yaml`
+
+### Apply Igress
+`kubectl apply -f ingress.yaml`
+
+### Validate the changes
+At this point changes can be validated by directly hitting the LB hostname by appending the URI.  
+EX: curl -vk https://a9f699f8ab8894c368345dd10bcc962a-6436a3934072ca42.elb.eu-west-2.amazonaws.com/api/v1/health  
+Response:    
+```shell
+curl -I a9f699f8ab8894c368345dd10bcc962a-6436a3934072ca42.elb.eu-west-2.amazonaws.com/api/v1/health 
+HTTP/1.1 200 
+Date: Mon, 28 Aug 2023 16:32:23 GMT
+Content-Type: application/json
+Content-Length: 185
+Connection: keep-alive
+
+curl  a9f699f8ab8894c368345dd10bcc962a-6436a3934072ca42.elb.eu-west-2.amazonaws.com/api/v1/health 
+{ 
+  &quot;Status&quot; : &quot;OK&quot;,
+  &quot;Version&quot; : &quot;V4-Argo-Resyncing&quot;,
+  &quot;Hostname&quot;: &quot;parking-lot-8466dbbbbc-xqjxj&quot;,
+  &quot;Hostaddr&quot;: &quot;10.0.2.204&quot;,
+  &quot;CanonicalHostName&quot;: &quot;parking-lot-8466dbbbbc-xqjxj&quot;
+}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, we will be implementing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cert-manager&lt;/code&gt; to add the certificate so to terminate the request via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-cert-manager&quot;&gt;Install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cert-manager&lt;/code&gt;&lt;/h3&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;helm repo add jetstack https://charts.jetstack.io
+helm repo update
+
+&lt;span class=&quot;c&quot;&gt;# next, install Cert-Manager into your cluster:&lt;/span&gt;
+
+helm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  cert-manager jetstack/cert-manager &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; cert-manager &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--create-namespace&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt; v1.7.2 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;installCRDs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;delete-admissionhooks&quot;&gt;Delete &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admissionhooks&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;In this example, I will be adding the loadbalancer hostname as a hosts for this example and by default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cert-manager&lt;/code&gt; admission hooks won’t allow me to do so as there is a validation that common name cannot be more than 65 bytes. Thus, for this, we need to delete the below two admissionhooks.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl delete validatingwebhookconfigurations cert-manager-webhook
+kubectl delete mutatingwebhookconfigurations cert-manager-webhook
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;cleanup&quot;&gt;Cleanup&lt;/h2&gt;
+&lt;p&gt;cert-manager&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;helm &lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;helm uninstall cert-manager &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; cert-manager
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;nginx-ingress&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;helm uninstall nginx-ingress 
+or 
+kubectl delete &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/aws/deploy.yaml
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/welcome-to-nginx/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/welcome-to-nginx/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Kong World!!!</title>
+        <description>&lt;h1 id=&quot;kong-demo&quot;&gt;Kong-demo&lt;/h1&gt;
+
+&lt;h2 id=&quot;what-and-benefits&quot;&gt;What and Benefits&lt;/h2&gt;
+&lt;p&gt;Kubernetes has become the name of the game when it comes to container orchestration. It allows teams to deploy and scale applications to meet changes in demand while providing a great developer experience.&lt;/p&gt;
+
+&lt;p&gt;The key to handling modern dynamic, scalable workloads in Kubernetes is a networking stack that can deliver API management, a service mesh and an ingress controller. Kong Ingress Controller allows users to manage the routing rules that control external user access to the service in a Kubernetes cluster from the same platform.&lt;/p&gt;
+
+&lt;p&gt;This article will look at how you can use Kong for full-stack application deployments with Kubernetes. By full-stack, we mean Kong can handle:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Containers&lt;/li&gt;
+  &lt;li&gt;Container networking&lt;/li&gt;
+  &lt;li&gt;Pod networking&lt;/li&gt;
+  &lt;li&gt;Service networking&lt;/li&gt;
+  &lt;li&gt;Host networking&lt;/li&gt;
+  &lt;li&gt;Load balancing&lt;/li&gt;
+  &lt;li&gt;Rate limiting&lt;/li&gt;
+  &lt;li&gt;HTTPS redirects&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;h3 id=&quot;start-minikube&quot;&gt;Start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Minikube&lt;/code&gt;&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;minikube start --nodes 2 --driver qemu --network socket_vmnet --cpus=4 --memory=6g --disk-size=10g
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;kong-installation&quot;&gt;Kong Installation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Via Kubectl apply
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl apply -f https://raw.githubusercontent.com/Kong/kubernetes-ingress-controller/latest/deploy/single/all-in-one-dbless.yaml
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Using helm
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;helm repo add kong https://charts.konghq.com 
+helm repo update
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Helm 3
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;helm install kong/kong --generate-name --set ingressController.installCRDs=false
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;start-minikube-tunnel&quot;&gt;Start &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minikube tunnel&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;minikube tunnel&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;note-the-kong-proxy-load-balancer-ip&quot;&gt;Note the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kong-proxy&lt;/code&gt; load balancer ip&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl get svc -n kong&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl get -o jsonpath=&quot;{.status.loadBalancer.ingress[0].ip}&quot; service -n kong kong-proxy&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;expose-the-app-to-the-internet&quot;&gt;Expose the App to the Internet&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl apply -f deploy.yaml&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;access-the-app-via-kong&quot;&gt;Access the app via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kong&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://&amp;lt;KONG_PROXY_LB_IP&amp;gt;/&amp;lt;PATH&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;plugin&quot;&gt;Plugin&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;kong-plugin.yaml
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl patch svc frontend \
+  -p &apos;{&quot;metadata&quot;:{&quot;annotations&quot;:{&quot;konghq.com/plugins&quot;: &quot;rl-by-ip\n&quot;}}}&apos;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;configuring-an-https-redirect&quot;&gt;Configuring an HTTPS Redirect&lt;/h1&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl patch ingress guestbook -p &apos;{&quot;metadata&quot;:{&quot;annotations&quot;:{&quot;konghq.com/protocols&quot;:&quot;https&quot;,&quot;konghq.com/https-redirect-status-code&quot;:&quot;301&quot;}}}&apos;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</description>
+        <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/welcome-to-kong/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/welcome-to-kong/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+      <item>
+        <title>Istio</title>
+        <description>&lt;h1 id=&quot;istio&quot;&gt;Istio&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://bestpractices.coreinfrastructure.org/projects/1395&quot;&gt;&lt;img src=&quot;https://bestpractices.coreinfrastructure.org/projects/1395/badge&quot; alt=&quot;CII Best Practices&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;https://goreportcard.com/report/github.com/istio/istio&quot;&gt;&lt;img src=&quot;https://goreportcard.com/badge/github.com/istio/istio&quot; alt=&quot;Go Report Card&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;https://godoc.org/istio.io/istio&quot;&gt;&lt;img src=&quot;https://godoc.org/istio.io/istio?status.svg&quot; alt=&quot;GoDoc&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://istio.io/&quot;&gt;
+    &lt;img src=&quot;https://github.com/istio/istio/raw/master/logo/istio-bluelogo-whitebackground-unframed.svg&quot; alt=&quot;Istio logo&quot; title=&quot;Istio&quot; height=&quot;100&quot; width=&quot;100&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Istio is an open source service mesh that layers transparently onto existing distributed applications. Istio’s powerful features provide a uniform and more efficient way to secure, connect, and monitor services. Istio is the path to load balancing, service-to-service authentication, and monitoring – with few or no service code changes.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For in-depth information about how to use Istio, visit &lt;a href=&quot;https://istio.io&quot;&gt;istio.io&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;To ask questions and get assistance from our community, visit &lt;a href=&quot;https://discuss.istio.io&quot;&gt;discuss.istio.io&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;To learn how to participate in our overall community, visit &lt;a href=&quot;https://istio.io/about/community&quot;&gt;our community page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this README:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#repositories&quot;&gt;Repositories&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#issue-management&quot;&gt;Issue management&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In addition, here are some other documents you may wish to read:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/istio/community#istio-community&quot;&gt;Istio Community&lt;/a&gt; - describes how to get involved and contribute to the Istio project&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/istio/istio/wiki/Preparing-for-Development&quot;&gt;Istio Developer’s Guide&lt;/a&gt; - explains how to set up and use an Istio development environment&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/istio/istio/wiki/Development-Conventions&quot;&gt;Project Conventions&lt;/a&gt; - describes the conventions we use within the code base&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/istio/istio/wiki/Writing-Fast-and-Lean-Code&quot;&gt;Creating Fast and Lean Code&lt;/a&gt; - performance-oriented advice and guidelines for the code base&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You’ll find many other useful documents on our &lt;a href=&quot;https://github.com/istio/istio/wiki&quot;&gt;Wiki&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://istio.io/latest/docs/concepts/what-is-istio/&quot;&gt;Istio&lt;/a&gt; is an open platform for providing a uniform way to &lt;a href=&quot;https://istio.io/latest/docs/examples/microservices-istio/&quot;&gt;integrate
+microservices&lt;/a&gt;, manage &lt;a href=&quot;https://istio.io/latest/docs/concepts/traffic-management/&quot;&gt;traffic flow&lt;/a&gt; across microservices, enforce policies
+and aggregate telemetry data. Istio’s control plane provides an abstraction
+layer over the underlying cluster management platform, such as Kubernetes.&lt;/p&gt;
+
+&lt;p&gt;Istio is composed of these components:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Envoy&lt;/strong&gt; - Sidecar proxies per microservice to handle ingress/egress traffic
+ between services in the cluster and from a service to external
+ services. The proxies form a &lt;em&gt;secure microservice mesh&lt;/em&gt; providing a rich
+ set of functions like discovery, rich layer-7 routing, circuit breakers,
+ policy enforcement and telemetry recording/reporting
+ functions.&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;Note: The service mesh is not an overlay network. It
+simplifies and enhances how microservices in an application talk to each
+other over the network provided by the underlying platform.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Istiod&lt;/strong&gt; - The Istio control plane. It provides service discovery, configuration and certificate management. It consists of the following sub-components:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Pilot&lt;/strong&gt; - Responsible for configuring the proxies at runtime.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Citadel&lt;/strong&gt; - Responsible for certificate issuance and rotation.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;strong&gt;Galley&lt;/strong&gt; - Responsible for validating, ingesting, aggregating, transforming and distributing config within Istio.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Operator&lt;/strong&gt; - The component provides user friendly options to operate the Istio service mesh.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;repositories&quot;&gt;Repositories&lt;/h2&gt;
+
+&lt;p&gt;The Istio project is divided across a few GitHub repositories:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/istio/api&quot;&gt;istio/api&lt;/a&gt;. This repository defines
+component-level APIs and common configuration formats for the Istio platform.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/istio/community&quot;&gt;istio/community&lt;/a&gt;. This repository contains
+information on the Istio community, including the various documents that govern
+the Istio open source project.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;README.md&quot;&gt;istio/istio&lt;/a&gt;. This is the main code repository. It hosts Istio’s
+core components, install artifacts, and sample programs. It includes:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;a href=&quot;istioctl/&quot;&gt;istioctl&lt;/a&gt;. This directory contains code for the
+&lt;a href=&quot;https://istio.io/latest/docs/reference/commands/istioctl/&quot;&gt;&lt;em&gt;istioctl&lt;/em&gt;&lt;/a&gt; command line utility.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;a href=&quot;operator/&quot;&gt;operator&lt;/a&gt;. This directory contains code for the
+&lt;a href=&quot;https://istio.io/latest/docs/setup/install/operator/&quot;&gt;Istio Operator&lt;/a&gt;.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;a href=&quot;pilot/&quot;&gt;pilot&lt;/a&gt;. This directory
+contains platform-specific code to populate the
+&lt;a href=&quot;https://istio.io/docs/concepts/traffic-management/#pilot&quot;&gt;abstract service model&lt;/a&gt;, dynamically reconfigure the proxies
+when the application topology changes, as well as translate
+&lt;a href=&quot;https://istio.io/latest/docs/reference/config/networking/&quot;&gt;routing rules&lt;/a&gt; into proxy specific configuration.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;&lt;a href=&quot;security/&quot;&gt;security&lt;/a&gt;. This directory contains &lt;a href=&quot;https://istio.io/latest/docs/concepts/security/&quot;&gt;security&lt;/a&gt; related code,
+including Citadel (acting as Certificate Authority), citadel agent, etc.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/istio/proxy&quot;&gt;istio/proxy&lt;/a&gt;. The Istio proxy contains
+extensions to the &lt;a href=&quot;https://github.com/envoyproxy/envoy&quot;&gt;Envoy proxy&lt;/a&gt; (in the form of
+Envoy filters) that support authentication, authorization, and telemetry collection.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;issue-management&quot;&gt;Issue management&lt;/h2&gt;
+
+&lt;p&gt;We use GitHub to track all of our bugs and feature requests. Each issue we track has a variety of metadata:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Epic&lt;/strong&gt;. An epic represents a feature area for Istio as a whole. Epics are fairly broad in scope and are basically product-level things.
+Each issue is ultimately part of an epic.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Milestone&lt;/strong&gt;. Each issue is assigned a milestone. This is 0.1, 0.2, …, or ‘Nebulous Future’. The milestone indicates when we
+think the issue should get addressed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Priority&lt;/strong&gt;. Each issue has a priority which is represented by the column in the &lt;a href=&quot;https://github.com/orgs/istio/projects/6&quot;&gt;Prioritization&lt;/a&gt; project. Priority can be one of
+P0, P1, P2, or &amp;gt;P2. The priority indicates how important it is to address the issue within the milestone. P0 says that the
+milestone cannot be considered achieved if the issue isn’t resolved.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;div align=&quot;center&quot;&gt;
+    &lt;img src=&quot;https://raw.githubusercontent.com/cncf/artwork/master/other/cncf/horizontal/color/cncf-color.svg&quot; width=&quot;300&quot; alt=&quot;Cloud Native Computing Foundation logo&quot; /&gt;
+    &lt;p&gt;Istio is a &lt;a href=&quot;https://cncf.io&quot;&gt;Cloud Native Computing Foundation&lt;/a&gt; project.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+        <link>/mediumish-theme-jekyll/welcome-to-istio/</link>
+        <guid isPermaLink="true">/mediumish-theme-jekyll/welcome-to-istio/</guid>
+        
+        
+        <category>Jekyll</category>
+        
+        <category>tutorial</category>
+        
+      </item>
+    
+  </channel>
+</rss>
