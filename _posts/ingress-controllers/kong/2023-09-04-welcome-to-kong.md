@@ -2,7 +2,7 @@
 layout: post
 title:  "Welcome to Kong World!!!"
 author: sal
-categories: [ Jekyll, tutorial ]
+categories: [ kong, tutorial ]
 image: assets/images/16.jpg
 ---
 # Kong-demo

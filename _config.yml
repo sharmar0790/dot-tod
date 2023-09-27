@@ -22,13 +22,13 @@ authors:
     twitter: https://twitter.com/wowthemesnet
     description: "Author of Mediumish, a Bootstrap Medium styled template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo."
   commando:
-    name: Commando
-    display_name: Commando    
+    name: RV0790
+    display_name: RV0790    
     avatar: 'assets/images/avatar.png'
     gravatar: b1cc14991db7a456fcd761680bbc8f81
-    email: Commando@gmail.com
+    email: sharmar0710@gmail.com
     linkedin: https://www.linkedin.com/in/sharmar0790
-    twitter: https://twitter.com/wowthemesnet
+    # twitter: https://twitter.com/wowthemesnet
     description: "This is the author box. Write a short description of the author here. You are currently previewing Mediumish demo, a Jekyll template compatible with Github pages."
 
 # Plugins

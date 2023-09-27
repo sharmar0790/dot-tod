@@ -2,7 +2,7 @@
 layout: post
 title:  "Nginx World"
 author: commando
-categories: [ Jekyll, tutorial ]
+categories: [ nginx, tutorial, ingress ]
 image: assets/images/1.jpg
 ---
 # Nginx-Ingress-demo

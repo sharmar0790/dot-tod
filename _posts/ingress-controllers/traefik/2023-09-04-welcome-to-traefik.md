@@ -2,7 +2,7 @@
 layout: post
 title:  "Traefik"
 author: commando
-categories: [ Jekyll, tutorial ]
+categories: [ traefik, tutorial ]
 image: assets/images/1.jpg
 ---
 # Traefik-demo

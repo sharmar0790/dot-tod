@@ -2,7 +2,7 @@
 layout: post
 title:  "Istio"
 author: commando
-categories: [ Jekyll, tutorial ]
+categories: [ Istio, Ingress ]
 image: assets/images/1.jpg
 featured: false
 ---
