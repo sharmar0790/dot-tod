@@ -7,7 +7,7 @@ image: assets/images/gitlab-pipeline.jpeg
 featured: false
 ---
 
-Now a days dynamic pipelines becomes a default proces sin every organisation. To make the devops flow smooth, less code, more work, so to provide coherent and efficient workflows. Gitlab has a very good feature of configuring a pipeline in parent-child relationship. In this a parent pipeline will take the responsibility and run the child (downstream) pipelines. 
+Now a days dynamic pipelines becomes a default process in every organisation. To make the devops flow smooth, less code, more work, so to provide coherent and efficient workflows. Gitlab has a very good feature of configuring a pipeline in parent-child relationship. In this a parent pipeline will take the responsibility and run the child (downstream) pipelines. 
 These features are `multi-branch` or `parent-child` pipelines. These both appraoch works in its own sense and has their own use cases, pros and cons.
 
 In this article, I am going to discuss about very common error we faced during setting up the multi-branch pipeline. In Multi-Branch Pipeline, we configure the parent pipeline in such a way it can call the downstream child pipeline. 
@@ -23,7 +23,7 @@ trigger:
 
 In one of my recent project I was configuring the same design and faced the error `failed (downstream project could not be found)`.
 
-I cheecked every thing like whether I do have the access or not to the projects I am referring ( I have the access), changing the project path etc still the pipeline was not working. I googled the error like hell. After doing multiple trial and errors and found the solution
+I checked every thing like whether I do have the access or not to the projects I am referring ( I have the access), changing the project path etc still the pipeline was not working. I googled the error like hell. After doing multiple trial and errors and found the solution
 
 The solution was quite very simple. I was referring the whole downstream project including the domain like - `https://<domain>/path/project`.
 
