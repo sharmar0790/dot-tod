@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "Ingress-Readme"
+title:  "Ingress Controllers"
 author: commando
-categories: [ Jekyll, tutorial ]
+# categories: [ Jekyll, tutorial ]
 image: assets/images/1.jpg
 ---
+
 # Kubernetes Ingress Controller
 
 ## What is Kubernetes Ingress Controller?
@@ -14,19 +15,17 @@ An ingress controller is a component that abstracts the complexity of routing ap
 
 The main functions of a Kubernetes ingress controller are to receive and load-balance traffic from outside Kubernetes to pods running in a Kubernetes cluster, and manage egress traffic from services within the cluster to services outside the cluster. They monitor pods running on Kubernetes and automatically update load balancing rules when pods are added or removed from a service. This is part of a series of articles about [Kubernetes API gateway](https://www.solo.io/topics/kubernetes-api-gateway/).
 
-## Kubernetes Ingress Controller Benefits and Limitations
+## Benefits and Limitations
 Technically, an ingress is not a service, it is a layer 7 (application layer) router that is typically exposed through a load balancer service. It is cheaper than using a cloud load balancer for each service as it relies on an ingress controller which is hosted together with the application. It ensures each service has only one IP that can be accessed from the internet, and traffic intended for this IP is routed to the correct service by the ingress controller.
 
-### Benefits of ingress controllers include:
-
+### Benefits :
 - **Provides secure access** to services over HTTP or HTTPS paths, instead of using direct connections. 
 - **Creates access routes** to multiple services, with full control over routing of services and conditions for external access. 
 - **Creates a single path** for ingress traffic, which can be modified based on conditions defined by the operator, instead of opening many connections to access a Kubernetes application.
 - **Simplifies management** of complex ingress processes, with the ability to easily manage access to multiple services in one system. This can have a significant impact on performance and management costs of large systems.
 - All ingress controllers support a set of annotations that enable specific software-based features. For example, in the Traefik ingress controller, users can use annotations to add middleware to ingress, even if not supported by the Ingress specification.
 
-### Limitations of ingress controllers:
-
+### Limitations :
 - The Ingress controller only handles layer 7 traffic, while an ingress routes HTTP and HTTPS traffic. This means it is not possible to route TCP and UDP traffic.
 - Ingress is used in a single namespace. This means that anything within a Kubernetes namespace can only reference services within the same namespace. To solve this problem, Kubernetes has introduced a gateway API specification, which enables cross-namespace communication. This specification is still in alpha status. A Kubernetes-native API Gateway can be used today for cross-namespace communications.
 
