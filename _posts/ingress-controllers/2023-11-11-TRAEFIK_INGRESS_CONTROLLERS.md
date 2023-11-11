@@ -172,3 +172,6 @@ X-Real-Ip: 10.244.0.1
 
 ## Cleanup
 `minikube delete`
+
+## Conclusion
+Ingress Controllers are powerful and can give you granular control over the networking on your Kubernetes cluster. In this article I tried to show how we can use the ingress controller with very minimal settings and locally using `minikube`. 
