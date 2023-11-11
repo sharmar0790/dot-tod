@@ -3,7 +3,7 @@ layout: post
 title:  "Ingress Controllers"
 author: commando
 # categories: [ Jekyll, tutorial ]
-image: assets/images/1.jpg
+# image: assets/images/1.jpg
 ---
 
 # Kubernetes Ingress Controller

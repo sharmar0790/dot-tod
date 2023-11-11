@@ -3,7 +3,7 @@ layout: post
 title:  "Docker Networking"
 author: commando
 categories: [ Docker, Networking ]
-image: assets/images/docker-networking.jpeg
+# image: assets/images/docker-networking.jpeg
 featured: false
 ---
 

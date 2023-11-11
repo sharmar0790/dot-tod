@@ -3,7 +3,7 @@ layout: post
 title:  "GITLAB: Error - downstream project not found"
 author: commando
 categories: [ Gitlab, Pipeline, Multi-Branch-Pipeline ]
-image: assets/images/gitlab-pipeline.jpeg
+# image: assets/images/gitlab-pipeline.jpeg
 featured: false
 ---
 
