@@ -11,7 +11,7 @@ author: commando
 ## What is Kubernetes Ingress Controller?
 Moving production workloads to Kubernetes has many benefits, but it also increases the complexity of managing application traffic. An ingress controller is a dedicated load balancer for Kubernetes clusters.
 
-An ingress controller is a component that abstracts the complexity of routing application traffic within a Kubernetes cluster, providing a bridge between Kubernetes services and external services. An ingress controller is configured using objects called Ingress Resources, managed via the Kubernetes API.
+A kubernetes ingress controller acts an reverse proxy and as a load balancer. An ingress controller is a component that abstracts the complexity of routing application traffic within a Kubernetes cluster, providing a bridge between Kubernetes services and external services. An ingress controller is configured using objects called Ingress Resources, managed via the Kubernetes API.
 
 The main functions of a Kubernetes ingress controller are to receive and load-balance traffic from outside Kubernetes to pods running in a Kubernetes cluster, and manage egress traffic from services within the cluster to services outside the cluster. They monitor pods running on Kubernetes and automatically update load balancing rules when pods are added or removed from a service. This is part of a series of articles about [Kubernetes API gateway](https://www.solo.io/topics/kubernetes-api-gateway/).
 
@@ -38,7 +38,9 @@ If you’re managing a small production environment and don’t plan to scale it
 However, if your application runs in a distributed, multi-cloud environment, you may need an enterprise-grade, high-performance networking solution. 
 
 ## Ingress Controller Solutions
-Kubernetes currently provides two ingress solutions by default —GCE L7 Load Balancer (GLBC) and ingress-nginx. You can use other solutions, but you’ll have to first deploy them in your Kubernetes cluster. Here is a full list of ingress controllers supported by Kubernetes. We’ll cover a few popular open source solutions.
+Kubernetes currently provides two ingress solutions by default —GCE L7 Load Balancer (GLBC) and ingress-nginx. You can use other solutions, but you’ll have to first deploy them in your Kubernetes cluster. Here is a full list of ingress controllers supported by Kubernetes. 
+
+We’ll cover a few popular open source solutions.
 
 ### Istio Ingress
 Istio Ingress is a service mesh solution that can also serve as an ingress controller, regulating outside traffic entering a Kubernetes cluster. Istio makes use of Envoy proxies, deployed in a sidecar container alongside every exposed service in the cluster. Envoy offers advanced traffic routing and observability capabilities.
